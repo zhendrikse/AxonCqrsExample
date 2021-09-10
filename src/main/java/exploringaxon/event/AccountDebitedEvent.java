@@ -1,4 +1,4 @@
-package exploringaxon.api.event;
+package exploringaxon.event;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

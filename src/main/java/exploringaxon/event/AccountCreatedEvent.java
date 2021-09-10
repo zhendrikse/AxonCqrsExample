@@ -1,4 +1,4 @@
-package exploringaxon.api.event;
+package exploringaxon.event;
 
 /**
  * Created by Dadepo Aderemi.

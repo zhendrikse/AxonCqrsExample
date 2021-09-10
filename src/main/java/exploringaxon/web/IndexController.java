@@ -1,7 +1,7 @@
 package exploringaxon.web;
 
-import exploringaxon.api.command.CreditAccountCommand;
-import exploringaxon.api.command.DebitAccountCommand;
+import exploringaxon.command.CreditAccountCommand;
+import exploringaxon.command.DebitAccountCommand;
 import exploringaxon.replay.AccountCreditedReplayEventHandler;
 import org.axonframework.commandhandling.GenericCommandMessage;
 import org.axonframework.commandhandling.callbacks.LoggingCallback;
@@ -29,7 +29,6 @@ public class IndexController {
     @Autowired
     AccountCreditedReplayEventHandler replayEventHandler;
 
-
     @Autowired
     private CommandGateway commandGateway;
 
@@ -43,7 +42,6 @@ public class IndexController {
     public String about() {
         return "about";
     }
-
 
     @RequestMapping("/debit")
     @Transactional

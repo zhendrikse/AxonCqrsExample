@@ -1,18 +1,18 @@
-package exploringaxon.api.command;
+package exploringaxon.command;
 
 import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
 
 /**
  * Created by Dadepo Aderemi.
  */
-public class CreditAccountCommand {
+public class DebitAccountCommand {
 
     @TargetAggregateIdentifier
     private final String account;
 
     private final Double amount;
 
-    public CreditAccountCommand(String account, Double amount) {
+    public DebitAccountCommand(String account, Double amount) {
         this.account = account;
         this.amount = amount;
     }

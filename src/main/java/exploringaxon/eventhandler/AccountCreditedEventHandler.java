@@ -1,6 +1,6 @@
 package exploringaxon.eventhandler;
 
-import exploringaxon.api.event.AccountCreditedEvent;
+import exploringaxon.event.AccountCreditedEvent;
 import org.axonframework.domain.Message;
 import org.axonframework.eventhandling.annotation.EventHandler;
 import org.axonframework.eventhandling.annotation.Timestamp;

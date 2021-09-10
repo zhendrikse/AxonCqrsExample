@@ -1,7 +1,7 @@
 package exploringaxon.replay;
 
-import exploringaxon.api.event.AccountCreditedEvent;
-import exploringaxon.api.event.AccountDebitedEvent;
+import exploringaxon.event.AccountCreditedEvent;
+import exploringaxon.event.AccountDebitedEvent;
 import org.axonframework.eventhandling.annotation.EventHandler;
 import org.axonframework.eventhandling.replay.ReplayAware;
 import org.springframework.stereotype.Component;
