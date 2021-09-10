@@ -29,7 +29,7 @@ public class Db {
     protected PlatformTransactionManager txManager;
 
     @Autowired
-    private Repository repository;
+    private Repository<Account> repository;
 
     @Autowired
     private javax.sql.DataSource dataSource;

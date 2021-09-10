@@ -5,7 +5,7 @@
 
 	<groupId>com.blogspot.geekabyte</groupId>
 	<artifactId>exploring-axon</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<packaging>jar</packaging>
 
 	<name>exploring-axon</name>
@@ -39,12 +39,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-    <!-- REMOVE AFTER MIGRATION TO 2.0 -->
-    <!--dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-properties-migrator</artifactId>
-        <scope>runtime</scope>
-    </dependency-->
 
 		<dependency>
 			<groupId>org.axonframework</groupId>
