@@ -22,7 +22,7 @@ import org.axonframework.eventstore.jdbc.JdbcEventStore;
 import org.axonframework.eventstore.management.EventStoreManagement;
 import org.axonframework.repository.Repository;
 import org.axonframework.unitofwork.NoTransactionManager;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.jdbc.DataSourceBuilder; 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
