@@ -10,16 +10,16 @@ import org.axonframework.test.FixtureConfiguration;
 import org.axonframework.test.Fixtures;
 import org.junit.*;
 import org.junit.runner.*;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest; 
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = ExploringAxonApplication.class)
+@SpringBootTest(classes = ExploringAxonApplication.class)
 @WebAppConfiguration
 public class ExploringAxonApplicationTests {
 
-	private FixtureConfiguration fixture;
+	private FixtureConfiguration<Account> fixture;
 	private String accountNo = "test-acc";
 
 	@Before
