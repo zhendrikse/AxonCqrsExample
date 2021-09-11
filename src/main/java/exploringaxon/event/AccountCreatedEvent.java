@@ -1,14 +1,16 @@
 package exploringaxon.event;
 
+import exploringaxon.model.AccountNumber;
+
 public class AccountCreatedEvent {
 
-    private final String accountNo;
+    private final AccountNumber accountNo;
 
-    public AccountCreatedEvent(String accountNo) {
+    public AccountCreatedEvent(final AccountNumber accountNo) {
         this.accountNo = accountNo;
     }
 
-    public String getAccountNo() {
+    public AccountNumber getAccountNo() {
         return accountNo;
     }
 }

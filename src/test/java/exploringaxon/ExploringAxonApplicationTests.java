@@ -31,7 +31,7 @@ public class ExploringAxonApplicationTests {
 
 	@Test
 	public void testFirstDeposit() {
-		fixture.given(new AccountCreatedEvent(accountNo))
+		fixture.given(new AccountCreatedEvent(accountNumber))
 			   .when(new CreditAccountCommand(accountNumber, 100.00))
 			   .expectEvents(new AccountCreditedEvent(accountNo, 100.00, 0.0));
 
@@ -39,7 +39,7 @@ public class ExploringAxonApplicationTests {
 
 	@Test
 	public void testFirstSecondDeposit() {
-		fixture.given(new AccountCreatedEvent(accountNo),
+		fixture.given(new AccountCreatedEvent(accountNumber),
 					  new AccountCreditedEvent(accountNo, 100.00, 0.0))
 			   .when(new CreditAccountCommand(accountNumber, 40.00))
 			   .expectEvents(new AccountCreditedEvent(accountNo, 40.00, 100.00));
@@ -47,7 +47,7 @@ public class ExploringAxonApplicationTests {
 
 	@Test
 	public void testCreditingDebitingAndCrediting() {
-		fixture.given(new AccountCreatedEvent(accountNo),
+		fixture.given(new AccountCreatedEvent(accountNumber),
 					  new AccountCreditedEvent(accountNo, 100.00, 0.0),
 					  new AccountDebitedEvent(accountNo, 40.00, 100.0))
 			   .when(new CreditAccountCommand(accountNumber, 40.00))
@@ -56,14 +56,14 @@ public class ExploringAxonApplicationTests {
 
 	@Test
 	public void cannotCreditWithAMoreThanMillion() {
-		fixture.given(new AccountCreatedEvent(accountNo))
+		fixture.given(new AccountCreatedEvent(accountNumber))
 			   .when(new CreditAccountCommand(accountNumber, 10000000.00))
 			   .expectException(IllegalArgumentException.class);
 	}
 
 	@Test
 	public void cannotDebitAccountWithZeroBalance() {
-		fixture.given(new AccountCreatedEvent(accountNo))
+		fixture.given(new AccountCreatedEvent(accountNumber))
 			   .when(new DebitAccountCommand(accountNumber, 1.0))
 			   .expectException(IllegalArgumentException.class);
 	}

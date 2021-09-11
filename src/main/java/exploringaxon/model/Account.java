@@ -25,13 +25,13 @@ public class Account extends AbstractAnnotatedAggregateRoot {
     public Account() {
     }
 
-    public Account(final String accountNo) {
+    public Account(final AccountNumber accountNo) {
         apply(new AccountCreatedEvent(accountNo));
     }
 
     @EventSourcingHandler
     public void applyAccountCreation(AccountCreatedEvent event) {
-        this.accountNo = event.getAccountNo();
+        this.accountNo = event.getAccountNo().asString();
         this.balance = 0.0d;
     }
 

@@ -1,6 +1,7 @@
 package exploringaxon.web;
 
 import exploringaxon.model.Account;
+import exploringaxon.model.AccountNumber;
 import org.axonframework.repository.Repository;
 import org.axonframework.unitofwork.DefaultUnitOfWork;
 import org.axonframework.unitofwork.UnitOfWork;
@@ -19,7 +20,6 @@ import javax.annotation.PostConstruct;
 
 /**
  * Adds the two account types needed.
- * Created by Dadepo Aderemi.
  */
 @Component
 public class Db {
@@ -46,8 +46,8 @@ public class Db {
             @Override
             protected void doInTransactionWithoutResult(TransactionStatus status) {
                 UnitOfWork uow = DefaultUnitOfWork.startAndGet();
-                repository.add(new Account("account-one"));
-                repository.add(new Account("account-two"));
+                repository.add(new Account(new AccountNumber("account-one")));
+                repository.add(new Account(new AccountNumber("account-two")));
                 uow.commit();
             }
         });
