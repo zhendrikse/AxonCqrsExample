@@ -5,8 +5,6 @@ import java.time.ZoneId;
 
 /**
  * Event Class that communicates that an account has been debited
- *
- * Created by Dadepo Aderemi.
  */
 public class AccountDebitedEvent {
     private final String accountNo;
@@ -14,7 +12,7 @@ public class AccountDebitedEvent {
     private final Double balance;
     private final long timeStamp;
 
-    public AccountDebitedEvent(String accountNo, Double amountDebited, Double balance) {
+    public AccountDebitedEvent(final String accountNo, final Double amountDebited, final Double balance) {
         this.accountNo = accountNo;
         this.amountDebited = amountDebited;
         this.balance = balance;

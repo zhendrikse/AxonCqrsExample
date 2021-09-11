@@ -5,8 +5,6 @@ import java.time.ZoneId;
 
 /**
  * Event Class that communicates that an account has been credited
- *
- * Created by Dadepo Aderemi.
  */
 public class AccountCreditedEvent {
 
@@ -15,7 +13,7 @@ public class AccountCreditedEvent {
     private final Double balance;
     private final long timeStamp;
 
-    public AccountCreditedEvent(String accountNo, Double amountCredited, Double balance) {
+    public AccountCreditedEvent(final String accountNo, final Double amountCredited, final Double balance) {
         this.accountNo = accountNo;
         this.amountCredited = amountCredited;
         this.balance = balance;

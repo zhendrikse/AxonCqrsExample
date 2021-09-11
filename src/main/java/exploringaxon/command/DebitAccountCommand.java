@@ -2,9 +2,6 @@ package exploringaxon.command;
 
 import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
 
-/**
- * Created by Dadepo Aderemi.
- */
 public class DebitAccountCommand {
 
     @TargetAggregateIdentifier
@@ -12,7 +9,7 @@ public class DebitAccountCommand {
 
     private final Double amount;
 
-    public DebitAccountCommand(String account, Double amount) {
+    public DebitAccountCommand(final String account, final Double amount) {
         this.account = account;
         this.amount = amount;
     }
