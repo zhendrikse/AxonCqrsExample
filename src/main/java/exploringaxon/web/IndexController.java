@@ -46,7 +46,8 @@ public class IndexController {
     @ResponseBody
     public void doDebit(@RequestParam("acc") String accountNumber, @RequestParam("amount") double amount) {
         final AccountNumber accountNo = new AccountNumber(accountNumber);
-        final DebitAccountCommand debitAccountCommandCommand = new DebitAccountCommand(accountNo, amount);
+        // TODO make currency variable
+        final DebitAccountCommand debitAccountCommandCommand = new DebitAccountCommand(accountNo, amount, "EUR");
         commandGateway.send(debitAccountCommandCommand);
     }
 
@@ -55,7 +56,8 @@ public class IndexController {
     @ResponseBody
     public void doCredit(@RequestParam("acc") String accountNumber, @RequestParam("amount") double amount) {
         final AccountNumber accountNo = new AccountNumber(accountNumber);
-        final CreditAccountCommand creditAccountCommandCommand = new CreditAccountCommand(accountNo, amount);
+        // TODO make currency variable
+        final CreditAccountCommand creditAccountCommandCommand = new CreditAccountCommand(accountNo, amount, "EUR");
         final GenericCommandMessage<CreditAccountCommand> message = new GenericCommandMessage<>(creditAccountCommandCommand);
         commandGateway.send(creditAccountCommandCommand, new LoggingCallback(message));
     }

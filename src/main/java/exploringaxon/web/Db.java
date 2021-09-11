@@ -1,7 +1,7 @@
 package exploringaxon.web;
 
 import exploringaxon.model.Account;
-import exploringaxon.model.AccountNumber;
+import exploringaxon.command.CreateAccountCommand;
 import org.axonframework.repository.Repository;
 import org.axonframework.unitofwork.DefaultUnitOfWork;
 import org.axonframework.unitofwork.UnitOfWork;
@@ -46,8 +46,8 @@ public class Db {
             @Override
             protected void doInTransactionWithoutResult(TransactionStatus status) {
                 UnitOfWork uow = DefaultUnitOfWork.startAndGet();
-                repository.add(new Account(new AccountNumber("account-one")));
-                repository.add(new Account(new AccountNumber("account-two")));
+                repository.add(new Account(new CreateAccountCommand("account-one", 0.0d, "EUR")));
+                repository.add(new Account(new CreateAccountCommand("account-two", 0.0d, "EUR")));
                 uow.commit();
             }
         });

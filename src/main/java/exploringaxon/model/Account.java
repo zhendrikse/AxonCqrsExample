@@ -1,5 +1,6 @@
 package exploringaxon.model;
 
+import exploringaxon.command.CreateAccountCommand;
 import exploringaxon.command.CreditAccountCommand;
 import exploringaxon.command.DebitAccountCommand;
 import exploringaxon.event.AccountCreatedEvent;
@@ -22,17 +23,20 @@ public class Account extends AbstractAnnotatedAggregateRoot {
 
     private Double balance;
 
+    private String currency;
+
     public Account() {
     }
 
-    public Account(final AccountNumber accountNo) {
-        apply(new AccountCreatedEvent(accountNo));
+    public Account(final CreateAccountCommand command) {
+        apply(new AccountCreatedEvent(new AccountNumber(command.id), command.balance, command.currency));
     }
 
     @EventSourcingHandler
     public void applyAccountCreation(AccountCreatedEvent event) {
         this.accountNo = event.accountNo.asString();
-        this.balance = 0.0d;
+        this.balance = event.balance;
+        this.currency = event.currency;
     }
 
     // Business Logic:

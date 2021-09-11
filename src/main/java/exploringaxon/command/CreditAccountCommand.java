@@ -9,9 +9,12 @@ public class CreditAccountCommand {
     public final String account;
 
     public final Double amount;
+  
+    public final String currency;
 
-    public CreditAccountCommand(AccountNumber account, Double amount) {
+    public CreditAccountCommand(AccountNumber account, Double amount, String currency) {
         this.account = account.asString();
         this.amount = amount;
+        this.currency = currency;
     }
 }

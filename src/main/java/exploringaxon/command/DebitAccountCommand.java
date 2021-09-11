@@ -10,8 +10,11 @@ public class DebitAccountCommand {
 
     public final Double amount;
 
-    public DebitAccountCommand(AccountNumber account, Double amount) {
+    public final String currency;
+
+    public DebitAccountCommand(AccountNumber account, Double amount, String currency) {
         this.account = account.asString();
         this.amount = amount;
+        this.currency = currency;
     }
 }

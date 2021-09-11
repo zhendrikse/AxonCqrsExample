@@ -30,40 +30,40 @@ public class ExploringAxonApplicationTests {
 
 	@Test
 	public void testFirstDeposit() {
-		fixture.given(new AccountCreatedEvent(accountNumber))
-			   .when(new CreditAccountCommand(accountNumber, 100.00))
+		fixture.given(new AccountCreatedEvent(accountNumber, 0.0d, "EUR"))
+			   .when(new CreditAccountCommand(accountNumber, 100.00, "EUR"))
 			   .expectEvents(new AccountCreditedEvent(accountNumber, 100.00, 0.0));
 
 	}
 
 	@Test
 	public void testFirstSecondDeposit() {
-		fixture.given(new AccountCreatedEvent(accountNumber),
+		fixture.given(new AccountCreatedEvent(accountNumber, 0.0d, "EUR"),
 					  new AccountCreditedEvent(accountNumber, 100.00, 0.0))
-			   .when(new CreditAccountCommand(accountNumber, 40.00))
+			   .when(new CreditAccountCommand(accountNumber, 40.00, "EUR"))
 			   .expectEvents(new AccountCreditedEvent(accountNumber, 40.00, 100.00));
 	}
 
 	@Test
 	public void testCreditingDebitingAndCrediting() {
-		fixture.given(new AccountCreatedEvent(accountNumber),
+		fixture.given(new AccountCreatedEvent(accountNumber, 0.0d, "EUR"),
 					  new AccountCreditedEvent(accountNumber, 100.00, 0.0),
 					  new AccountDebitedEvent(accountNumber, 40.00, 100.0))
-			   .when(new CreditAccountCommand(accountNumber, 40.00))
+			   .when(new CreditAccountCommand(accountNumber, 40.00, "EUR"))
 			   .expectEvents(new AccountCreditedEvent(accountNumber, 40.00, 60.00));
 	}
 
 	@Test
 	public void cannotCreditWithAMoreThanMillion() {
-		fixture.given(new AccountCreatedEvent(accountNumber))
-			   .when(new CreditAccountCommand(accountNumber, 10000000.00))
+		fixture.given(new AccountCreatedEvent(accountNumber, 0.0d, "EUR"))
+			   .when(new CreditAccountCommand(accountNumber, 10000000.00, "EUR"))
 			   .expectException(IllegalArgumentException.class);
 	}
 
 	@Test
 	public void cannotDebitAccountWithZeroBalance() {
-		fixture.given(new AccountCreatedEvent(accountNumber))
-			   .when(new DebitAccountCommand(accountNumber, 1.0))
+		fixture.given(new AccountCreatedEvent(accountNumber, 0.0d, "EUR"))
+			   .when(new DebitAccountCommand(accountNumber, 1.0, "EUR"))
 			   .expectException(IllegalArgumentException.class);
 	}
 
