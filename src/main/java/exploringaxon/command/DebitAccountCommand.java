@@ -1,6 +1,7 @@
 package exploringaxon.command;
 
 import org.axonframework.commandhandling.annotation.TargetAggregateIdentifier;
+import exploringaxon.model.AccountNumber;
 
 public class DebitAccountCommand {
 
@@ -9,8 +10,8 @@ public class DebitAccountCommand {
 
     public final Double amount;
 
-    public DebitAccountCommand(String account, Double amount) {
-        this.account = account;
+    public DebitAccountCommand(AccountNumber account, Double amount) {
+        this.account = account.asString();
         this.amount = amount;
     }
 }

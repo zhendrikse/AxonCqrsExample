@@ -46,8 +46,8 @@ public class Db {
             @Override
             protected void doInTransactionWithoutResult(TransactionStatus status) {
                 UnitOfWork uow = DefaultUnitOfWork.startAndGet();
-                repository.add(new Account("acc-one"));
-                repository.add(new Account("acc-two"));
+                repository.add(new Account("account-one"));
+                repository.add(new Account("account-two"));
                 uow.commit();
             }
         });
@@ -55,8 +55,8 @@ public class Db {
         // init the tables for query/view
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcTemplate.execute("create table account_view (account_no VARCHAR , balance FLOAT )");
-        jdbcTemplate.update("insert into account_view (account_no, balance) values (?, ?)", new Object[]{"acc-one", 0.0});
-        jdbcTemplate.update("insert into account_view (account_no, balance) values (?, ?)", new Object[]{"acc-two", 0.0});
+        jdbcTemplate.update("insert into account_view (account_no, balance) values (?, ?)", new Object[]{"account-one", 0.0});
+        jdbcTemplate.update("insert into account_view (account_no, balance) values (?, ?)", new Object[]{"account-two", 0.0});
     }
 
 }

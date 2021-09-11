@@ -5,6 +5,7 @@ import exploringaxon.command.DebitAccountCommand;
 import exploringaxon.event.AccountCreatedEvent;
 import exploringaxon.event.AccountCreditedEvent;
 import exploringaxon.event.AccountDebitedEvent;
+import exploringaxon.model.AccountNumber;
 import org.axonframework.commandhandling.annotation.CommandHandler;
 import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;
 import org.axonframework.eventsourcing.annotation.AggregateIdentifier;
@@ -24,7 +25,7 @@ public class Account extends AbstractAnnotatedAggregateRoot {
     public Account() {
     }
 
-    public Account(String accountNo) {
+    public Account(final String accountNo) {
         apply(new AccountCreatedEvent(accountNo));
     }
 

@@ -34,14 +34,14 @@
             <div>
                 <select id="debit-account-no">
                     <option value="null">Choose Account</option>
-                    <option value="acc-one">Account One</option>
-                    <option value="acc-two">Account Two</option>
+                    <option value="account-one">Account One</option>
+                    <option value="account-two">Account Two</option>
                 </select>
                 <input id="debit-amount" type="text" /> <button id="debit-btn">Debit Account</button><br/>
                 <select id="credit-account-no">
                     <option value="null">Choose Account</option>
-                    <option value="acc-one">Account One</option>
-                    <option  value="acc-two">Account Two</option>
+                    <option value="account-one">Account One</option>
+                    <option  value="account-two">Account Two</option>
                 </select>
                 <input id="credit-amount" type="text" /> <button id="credit-btn">Credit Account</button>
             </div>

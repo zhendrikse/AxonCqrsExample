@@ -2,6 +2,7 @@ package exploringaxon.web;
 
 import exploringaxon.command.CreditAccountCommand;
 import exploringaxon.command.DebitAccountCommand;
+import exploringaxon.model.AccountNumber;
 import exploringaxon.replay.AccountCreditedReplayEventHandler;
 import org.axonframework.commandhandling.GenericCommandMessage;
 import org.axonframework.commandhandling.callbacks.LoggingCallback;
@@ -16,9 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- * Created by Dadepo Aderemi.
- */
 @Controller
 public class IndexController {
 
@@ -47,7 +45,8 @@ public class IndexController {
     @Transactional
     @ResponseBody
     public void doDebit(@RequestParam("acc") String accountNumber, @RequestParam("amount") double amount) {
-        DebitAccountCommand debitAccountCommandCommand = new DebitAccountCommand(accountNumber, amount);
+        final AccountNumber accountNo = new AccountNumber(accountNumber);
+        final DebitAccountCommand debitAccountCommandCommand = new DebitAccountCommand(accountNo, amount);
         commandGateway.send(debitAccountCommandCommand);
     }
 
@@ -55,8 +54,9 @@ public class IndexController {
     @Transactional
     @ResponseBody
     public void doCredit(@RequestParam("acc") String accountNumber, @RequestParam("amount") double amount) {
-        CreditAccountCommand creditAccountCommandCommand = new CreditAccountCommand(accountNumber, amount);
-        GenericCommandMessage<CreditAccountCommand> message = new GenericCommandMessage<>(creditAccountCommandCommand);
+        final AccountNumber accountNo = new AccountNumber(accountNumber);
+        final CreditAccountCommand creditAccountCommandCommand = new CreditAccountCommand(accountNo, amount);
+        final GenericCommandMessage<CreditAccountCommand> message = new GenericCommandMessage<>(creditAccountCommandCommand);
         commandGateway.send(creditAccountCommandCommand, new LoggingCallback(message));
     }
 
