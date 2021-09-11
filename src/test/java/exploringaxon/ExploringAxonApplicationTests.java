@@ -21,8 +21,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 public class ExploringAxonApplicationTests {
 
 	private FixtureConfiguration<Account> fixture;
-	private String accountNo = "test-acc";
-	private AccountNumber accountNumber = new AccountNumber(accountNo);
+	private AccountNumber accountNumber = new AccountNumber("account-tst");
 
 	@Before
 	public void setUp() {
@@ -33,25 +32,25 @@ public class ExploringAxonApplicationTests {
 	public void testFirstDeposit() {
 		fixture.given(new AccountCreatedEvent(accountNumber))
 			   .when(new CreditAccountCommand(accountNumber, 100.00))
-			   .expectEvents(new AccountCreditedEvent(accountNo, 100.00, 0.0));
+			   .expectEvents(new AccountCreditedEvent(accountNumber, 100.00, 0.0));
 
 	}
 
 	@Test
 	public void testFirstSecondDeposit() {
 		fixture.given(new AccountCreatedEvent(accountNumber),
-					  new AccountCreditedEvent(accountNo, 100.00, 0.0))
+					  new AccountCreditedEvent(accountNumber, 100.00, 0.0))
 			   .when(new CreditAccountCommand(accountNumber, 40.00))
-			   .expectEvents(new AccountCreditedEvent(accountNo, 40.00, 100.00));
+			   .expectEvents(new AccountCreditedEvent(accountNumber, 40.00, 100.00));
 	}
 
 	@Test
 	public void testCreditingDebitingAndCrediting() {
 		fixture.given(new AccountCreatedEvent(accountNumber),
-					  new AccountCreditedEvent(accountNo, 100.00, 0.0),
-					  new AccountDebitedEvent(accountNo, 40.00, 100.0))
+					  new AccountCreditedEvent(accountNumber, 100.00, 0.0),
+					  new AccountDebitedEvent(accountNumber, 40.00, 100.0))
 			   .when(new CreditAccountCommand(accountNumber, 40.00))
-			   .expectEvents(new AccountCreditedEvent(accountNo, 40.00, 60.00));
+			   .expectEvents(new AccountCreditedEvent(accountNumber, 40.00, 60.00));
 	}
 
 	@Test

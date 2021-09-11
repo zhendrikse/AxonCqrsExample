@@ -18,14 +18,14 @@ public class AccountCreditedReplayEventHandler implements ReplayAware {
     @EventHandler
     public void handle(AccountCreditedEvent event) {
         String auditMsg = String.format("%s credited to account with account no {%s} on %s",
-                event.amountCredited, event.accountNo, formatTimestampToString(event.timeStamp));
+                event.amountCredited, event.accountNo.asString(), formatTimestampToString(event.timeStamp));
         audit.add(auditMsg);
     }
 
     @EventHandler
     public void handle(AccountDebitedEvent event) {
         String auditMsg = String.format("%s debited from account with account no {%s} on %s",
-                event.amountDebited, event.accountNo, formatTimestampToString(event.timeStamp));
+                event.amountDebited, event.accountNo.asString(), formatTimestampToString(event.timeStamp));
         audit.add(auditMsg);
     }
 

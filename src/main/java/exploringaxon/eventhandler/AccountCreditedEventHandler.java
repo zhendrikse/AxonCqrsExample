@@ -25,7 +25,7 @@ public class AccountCreditedEventHandler {
         final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         // Get the current states as reflected in the event
-        final String accountNo = event.accountNo;
+        final String accountNo = event.accountNo.asString();
         final Double balance = event.balance;
         final Double amountCredited = event.amountCredited;
         final Double newBalance = balance + amountCredited;

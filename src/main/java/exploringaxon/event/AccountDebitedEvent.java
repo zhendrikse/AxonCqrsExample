@@ -2,17 +2,18 @@ package exploringaxon.event;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import exploringaxon.model.AccountNumber;
 
 /**
- * Event Class that communicates that an account has been debited
+ * Event Class that communicates that an account has been debited.
  */
 public class AccountDebitedEvent {
-    public final String accountNo;
+    public final AccountNumber accountNo;
     public final Double amountDebited;
     public final Double balance;
     public final long timeStamp;
 
-    public AccountDebitedEvent(String accountNo, Double amountDebited, Double balance) {
+    public AccountDebitedEvent(AccountNumber accountNo, Double amountDebited, Double balance) {
         this.accountNo = accountNo;
         this.amountDebited = amountDebited;
         this.balance = balance;

@@ -43,27 +43,24 @@ public class Account extends AbstractAnnotatedAggregateRoot {
     } 
 
     @CommandHandler
-    public void debit(DebitAccountCommand debitAccountCommand) {
-        final Double debitAmount = debitAccountCommand.amount;
-        if (isDebitTransactionAllowed(debitAmount))
+    public void debit(final DebitAccountCommand debitAccountCommand) {
+        if (isDebitTransactionAllowed(debitAccountCommand.amount))
             /**
              * Instead of changing the state directly we apply an event
              * that conveys what happened.
              *
              * The event thus applied is stored.
              */
-            apply(new AccountDebitedEvent(this.accountNo, debitAmount, this.balance));
+            apply(new AccountDebitedEvent(new AccountNumber(this.accountNo), debitAccountCommand.amount, this.balance));
         else
             throw new IllegalArgumentException("Cannot debit with the amount");
     }
 
     @EventSourcingHandler
-    private void applyDebit(AccountDebitedEvent event) {
-        /**
-         * This method is called as a reflection of applying events stored in the event store.
-         * Consequent application of all the events in the event store will bring the Account
-         * to the most recent state.
-         */
+    private void applyDebit(final AccountDebitedEvent event) {
+        // This method is called as a reflection of applying events stored in the event store.
+        // Consequent application of all the events in the event store will bring the Account
+        // to the most recent state.
         this.balance -= event.amountDebited;
     }
 
@@ -75,27 +72,22 @@ public class Account extends AbstractAnnotatedAggregateRoot {
     }
 
     @CommandHandler
-    public void credit(CreditAccountCommand creditAccountCommand) {
-        final Double creditAmount = creditAccountCommand.amount;
-        if (isCreditTransactionAllowed(creditAmount))
-            /**
-             * Instead of changing the state directly we apply an event
-             * that conveys what happened.
-             *
-             * The event thus applied is stored.
-             */
-            apply(new AccountCreditedEvent(this.accountNo, creditAmount, this.balance));
+    public void credit(final CreditAccountCommand creditAccountCommand) {
+        if (isCreditTransactionAllowed(creditAccountCommand.amount))
+            // Instead of changing the state directly we apply an event
+            // that conveys what happened.
+            //
+            // The event thus applied is stored.
+            apply(new AccountCreditedEvent(new AccountNumber(this.accountNo), creditAccountCommand.amount, this.balance));
         else 
             throw new IllegalArgumentException("Cannot credit with the amount");
     }
 
     @EventSourcingHandler
     private void applyCredit(AccountCreditedEvent event) {
-        /**
-         * This method is called as a reflection of applying events stored in the event store.
-         * Consequent application of all the events in the event store will bring the Account
-         * to the most recent state.
-         */
+        // This method is called as a reflection of applying events stored in the event store.
+        // Consequent application of all the events in the event store will bring the Account
+        // to the most recent state.
         this.balance += event.amountCredited;
     }
 
@@ -103,7 +95,7 @@ public class Account extends AbstractAnnotatedAggregateRoot {
         return balance;
     }
 
-    public void setIdentifier(String id) {
+    public void setIdentifier(final String id) {
         this.accountNo = id;
     }
 
