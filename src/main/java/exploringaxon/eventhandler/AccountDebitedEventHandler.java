@@ -8,9 +8,6 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 
-/**
- * Created by Dadepo Aderemi.
- */
 @Component
 public class AccountDebitedEventHandler {
 

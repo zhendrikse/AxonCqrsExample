@@ -1,4 +1,4 @@
-package exploringaxon;
+package exploringaxon.application;
 
 import exploringaxon.model.Account;
 import org.axonframework.commandhandling.SimpleCommandBus;

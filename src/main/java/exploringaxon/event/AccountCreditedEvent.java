@@ -5,8 +5,6 @@ import java.time.ZoneId;
 
 /**
  * Event Class that communicates that an account has been credited
- *
- * Created by Dadepo Aderemi.
  */
 public class AccountCreditedEvent {
 

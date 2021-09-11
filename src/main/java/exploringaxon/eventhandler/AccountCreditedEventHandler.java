@@ -8,15 +8,15 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 
-/**
- * Created by Dadepo Aderemi.
- */
 @Component
 public class AccountCreditedEventHandler {
-
+    //private static Logger logger = LoggerFactory.getLogger(AccountCreditedEventHandler.class);
+    
     @Autowired
     DataSource dataSource;
 
@@ -34,7 +34,7 @@ public class AccountCreditedEventHandler {
         String updateQuery = "UPDATE account_view SET balance = ? WHERE account_no = ?";
         jdbcTemplate.update(updateQuery, new Object[]{newBalance, accountNo});
 
-        System.out.println("Events Handled With EventMessage " + eventMessage.toString() + " at " + moment.toString());
+        //logger.info("Events Handled With EventMessage " + eventMessage.toString() + " at " + moment.toString());
     }
 
 }
