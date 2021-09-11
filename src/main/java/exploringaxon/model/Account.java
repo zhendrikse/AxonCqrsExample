@@ -24,6 +24,8 @@ public class Account extends AbstractAnnotatedAggregateRoot {
     private Double balance;
 
     private String currency;
+  
+    private String status;
 
     public Account() {
     }
@@ -33,10 +35,11 @@ public class Account extends AbstractAnnotatedAggregateRoot {
     }
 
     @EventSourcingHandler
-    public void applyAccountCreation(AccountCreatedEvent event) {
+    public void on(AccountCreatedEvent event) {
         this.accountNo = event.accountNo.asString();
         this.balance = event.balance;
         this.currency = event.currency;
+        this.status = String.valueOf(Status.CREATED);
     }
 
     // Business Logic:
@@ -47,7 +50,7 @@ public class Account extends AbstractAnnotatedAggregateRoot {
     } 
 
     @CommandHandler
-    public void debit(final DebitAccountCommand debitAccountCommand) {
+    public void on(final DebitAccountCommand debitAccountCommand) {
         if (isDebitTransactionAllowed(debitAccountCommand.amount))
             /**
              * Instead of changing the state directly we apply an event
@@ -61,7 +64,7 @@ public class Account extends AbstractAnnotatedAggregateRoot {
     }
 
     @EventSourcingHandler
-    private void applyDebit(final AccountDebitedEvent event) {
+    private void on(final AccountDebitedEvent event) {
         // This method is called as a reflection of applying events stored in the event store.
         // Consequent application of all the events in the event store will bring the Account
         // to the most recent state.
@@ -76,7 +79,7 @@ public class Account extends AbstractAnnotatedAggregateRoot {
     }
 
     @CommandHandler
-    public void credit(final CreditAccountCommand creditAccountCommand) {
+    public void on(final CreditAccountCommand creditAccountCommand) {
         if (isCreditTransactionAllowed(creditAccountCommand.amount))
             // Instead of changing the state directly we apply an event
             // that conveys what happened.
@@ -88,7 +91,7 @@ public class Account extends AbstractAnnotatedAggregateRoot {
     }
 
     @EventSourcingHandler
-    private void applyCredit(AccountCreditedEvent event) {
+    private void on(final AccountCreditedEvent event) {
         // This method is called as a reflection of applying events stored in the event store.
         // Consequent application of all the events in the event store will bring the Account
         // to the most recent state.
@@ -101,6 +104,22 @@ public class Account extends AbstractAnnotatedAggregateRoot {
 
     public void setIdentifier(final String id) {
         this.accountNo = id;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
