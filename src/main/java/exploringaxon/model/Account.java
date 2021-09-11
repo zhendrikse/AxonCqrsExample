@@ -31,7 +31,7 @@ public class Account extends AbstractAnnotatedAggregateRoot {
 
     @EventSourcingHandler
     public void applyAccountCreation(AccountCreatedEvent event) {
-        this.accountNo = event.getAccountNo().asString();
+        this.accountNo = event.accountNo.asString();
         this.balance = 0.0d;
     }
 
@@ -64,7 +64,7 @@ public class Account extends AbstractAnnotatedAggregateRoot {
          * Consequent application of all the events in the event store will bring the Account
          * to the most recent state.
          */
-        this.balance -= event.getAmountDebited();
+        this.balance -= event.amountDebited;
     }
 
     // Business Logic:
@@ -96,7 +96,7 @@ public class Account extends AbstractAnnotatedAggregateRoot {
          * Consequent application of all the events in the event store will bring the Account
          * to the most recent state.
          */
-        this.balance += event.getAmountCredited();
+        this.balance += event.amountCredited;
     }
 
     public Double getBalance() {

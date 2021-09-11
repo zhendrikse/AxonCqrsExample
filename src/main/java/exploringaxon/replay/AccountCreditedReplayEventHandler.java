@@ -13,19 +13,19 @@ import java.util.List;
 @Component
 public class AccountCreditedReplayEventHandler implements ReplayAware {
 
-    List<String> audit = new ArrayList<>();
+    private List<String> audit = new ArrayList<>();
 
     @EventHandler
     public void handle(AccountCreditedEvent event) {
         String auditMsg = String.format("%s credited to account with account no {%s} on %s",
-                event.getAmountCredited(), event.getAccountNo(), formatTimestampToString(event.getTimeStamp()));
+                event.amountCredited, event.accountNo, formatTimestampToString(event.timeStamp));
         audit.add(auditMsg);
     }
 
     @EventHandler
     public void handle(AccountDebitedEvent event) {
         String auditMsg = String.format("%s debited from account with account no {%s} on %s",
-                event.getAmountDebited(), event.getAccountNo(), formatTimestampToString(event.getTimeStamp()));
+                event.amountDebited, event.accountNo, formatTimestampToString(event.timeStamp));
         audit.add(auditMsg);
     }
 

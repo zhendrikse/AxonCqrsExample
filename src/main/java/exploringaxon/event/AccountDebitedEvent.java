@@ -7,10 +7,10 @@ import java.time.ZoneId;
  * Event Class that communicates that an account has been debited
  */
 public class AccountDebitedEvent {
-    private final String accountNo;
-    private final Double amountDebited;
-    private final Double balance;
-    private final long timeStamp;
+    public final String accountNo;
+    public final Double amountDebited;
+    public final Double balance;
+    public final long timeStamp;
 
     public AccountDebitedEvent(String accountNo, Double amountDebited, Double balance) {
         this.accountNo = accountNo;
@@ -18,21 +18,5 @@ public class AccountDebitedEvent {
         this.balance = balance;
         ZoneId zoneId = ZoneId.systemDefault();
         this.timeStamp = LocalDateTime.now().atZone(zoneId).toEpochSecond();
-    }
-
-    public String getAccountNo() {
-        return accountNo;
-    }
-
-    public Double getAmountDebited() {
-        return amountDebited;
-    }
-
-    public Double getBalance() {
-        return balance;
-    }
-
-    public long getTimeStamp() {
-        return timeStamp;
     }
 }

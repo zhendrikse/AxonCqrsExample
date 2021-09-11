@@ -8,10 +8,10 @@ import java.time.ZoneId;
  */
 public class AccountCreditedEvent {
 
-    private final String accountNo;
-    private final Double amountCredited;
-    private final Double balance;
-    private final long timeStamp;
+    public final String accountNo;
+    public final Double amountCredited;
+    public final Double balance;
+    public final long timeStamp;
 
     public AccountCreditedEvent(String accountNo, Double amountCredited, Double balance) {
         this.accountNo = accountNo;
@@ -19,21 +19,5 @@ public class AccountCreditedEvent {
         this.balance = balance;
         ZoneId zoneId = ZoneId.systemDefault();
         this.timeStamp = LocalDateTime.now().atZone(zoneId).toEpochSecond();
-    }
-
-    public String getAccountNo() {
-        return accountNo;
-    }
-
-    public Double getAmountCredited() {
-        return amountCredited;
-    }
-
-    public Double getBalance() {
-        return balance;
-    }
-
-    public long getTimeStamp() {
-        return timeStamp;
     }
 }

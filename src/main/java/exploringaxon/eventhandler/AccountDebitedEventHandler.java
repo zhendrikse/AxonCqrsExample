@@ -12,20 +12,20 @@ import javax.sql.DataSource;
 public class AccountDebitedEventHandler {
 
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
 
     @EventHandler
     public void handleAccountDebitedEvent(AccountDebitedEvent event) {
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         // Get the current states as reflected in the event
-        String accountNo = event.getAccountNo();
-        Double balance = event.getBalance();
-        Double amountDebited = event.getAmountDebited();
-        Double newBalance = balance - amountDebited;
+        final String accountNo = event.accountNo;
+        final Double balance = event.balance;
+        final Double amountDebited = event.amountDebited;
+        final Double newBalance = balance - amountDebited;
 
         // Update the view
-        String updateQuery = "UPDATE account_view SET balance = ? WHERE account_no = ?";
+        final String updateQuery = "UPDATE account_view SET balance = ? WHERE account_no = ?";
         jdbcTemplate.update(updateQuery, new Object[]{newBalance, accountNo});
     }
 }

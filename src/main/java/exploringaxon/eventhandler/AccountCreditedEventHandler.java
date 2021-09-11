@@ -18,20 +18,20 @@ public class AccountCreditedEventHandler {
     //private static Logger logger = LoggerFactory.getLogger(AccountCreditedEventHandler.class);
     
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
 
     @EventHandler
     public void handleAccountCreditedEvent(AccountCreditedEvent event, Message eventMessage, @Timestamp DateTime moment) {
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         // Get the current states as reflected in the event
-        String accountNo = event.getAccountNo();
-        Double balance = event.getBalance();
-        Double amountCredited = event.getAmountCredited();
-        Double newBalance = balance + amountCredited;
+        final String accountNo = event.accountNo;
+        final Double balance = event.balance;
+        final Double amountCredited = event.amountCredited;
+        final Double newBalance = balance + amountCredited;
 
         // Update the view
-        String updateQuery = "UPDATE account_view SET balance = ? WHERE account_no = ?";
+        final String updateQuery = "UPDATE account_view SET balance = ? WHERE account_no = ?";
         jdbcTemplate.update(updateQuery, new Object[]{newBalance, accountNo});
 
         //logger.info("Events Handled With EventMessage " + eventMessage.toString() + " at " + moment.toString());
