@@ -1,10 +1,13 @@
 package exploringaxon.event;
 
+/**
+ * Created by Dadepo Aderemi.
+ */
 public class AccountCreatedEvent {
 
     private final String accountNo;
 
-    public AccountCreatedEvent(final String accountNo) {
+    public AccountCreatedEvent(String accountNo) {
         this.accountNo = accountNo;
     }
 

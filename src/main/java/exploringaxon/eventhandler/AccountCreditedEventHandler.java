@@ -1,7 +1,6 @@
 package exploringaxon.eventhandler;
 
 import exploringaxon.event.AccountCreditedEvent;
-import exploringaxon.model.Account;
 import org.axonframework.domain.Message;
 import org.axonframework.eventhandling.annotation.EventHandler;
 import org.axonframework.eventhandling.annotation.Timestamp;
@@ -12,6 +11,9 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 
+/**
+ * Created by Dadepo Aderemi.
+ */
 @Component
 public class AccountCreditedEventHandler {
 
@@ -19,7 +21,7 @@ public class AccountCreditedEventHandler {
     DataSource dataSource;
 
     @EventHandler
-    public void handleAccountCreditedEvent(AccountCreditedEvent event, Message<Account> eventMessage, @Timestamp DateTime moment) {
+    public void handleAccountCreditedEvent(AccountCreditedEvent event, Message eventMessage, @Timestamp DateTime moment) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
         // Get the current states as reflected in the event
