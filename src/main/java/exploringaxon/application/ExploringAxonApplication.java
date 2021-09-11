@@ -1,4 +1,4 @@
-package exploringaxon.application;
+package exploringaxon;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
