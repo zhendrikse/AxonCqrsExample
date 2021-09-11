@@ -43,7 +43,7 @@ public class Account extends AbstractAnnotatedAggregateRoot {
 
     @CommandHandler
     public void debit(DebitAccountCommand debitAccountCommand) {
-        final Double debitAmount = debitAccountCommand.getAmount();
+        final Double debitAmount = debitAccountCommand.amount;
         if (isDebitTransactionAllowed(debitAmount))
             /**
              * Instead of changing the state directly we apply an event
@@ -75,7 +75,7 @@ public class Account extends AbstractAnnotatedAggregateRoot {
 
     @CommandHandler
     public void credit(CreditAccountCommand creditAccountCommand) {
-        final Double creditAmount = creditAccountCommand.getAmount();
+        final Double creditAmount = creditAccountCommand.amount;
         if (isCreditTransactionAllowed(creditAmount))
             /**
              * Instead of changing the state directly we apply an event
