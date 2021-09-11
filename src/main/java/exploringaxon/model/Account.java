@@ -5,18 +5,15 @@ import exploringaxon.command.DebitAccountCommand;
 import exploringaxon.event.AccountCreatedEvent;
 import exploringaxon.event.AccountCreditedEvent;
 import exploringaxon.event.AccountDebitedEvent;
-import org.axonframework.commandhandling.annotation.CommandHandler;
-import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot;
-import org.axonframework.eventsourcing.annotation.AggregateIdentifier;
-import org.axonframework.eventsourcing.annotation.EventSourcingHandler;
+import org.axonframework.commandhandling.CommandHandler;
+import org.axonframework.commandhandling.TargetAggregateIdentifier;
+import org.axonframework.eventsourcing.EventSourcingHandler;
+import org.axonframework.commandhandling.model.AggregateLifecycle;
 
 /**
  * Entity that models the Account
- *
- * Created by Dadepo Aderemi.
  */
-
-public class Account extends AbstractAnnotatedAggregateRoot {
+public class Account {
     private static final long serialVersionUID = 8723320580782813954L;
 
     @AggregateIdentifier
