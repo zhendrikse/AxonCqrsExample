@@ -172,7 +172,7 @@ public class AppConfiguration {
      */
     @Bean
     public Repository<Account> eventSourcingRepository() {
-        EventSourcingRepository eventSourcingRepository = new EventSourcingRepository(Account.class, jdbcEventStore());
+        EventSourcingRepository<Account> eventSourcingRepository = new EventSourcingRepository(Account.class, jdbcEventStore());
         eventSourcingRepository.setEventBus(clusteringEventBus());
         return eventSourcingRepository;
     }
@@ -183,7 +183,7 @@ public class AppConfiguration {
      * @return an instance of {@link AggregateAnnotationCommandHandler}
      */
     @Bean
-    public AggregateAnnotationCommandHandler aggregateAnnotationCommandHandler(){
+    public AggregateAnnotationCommandHandler<Account> aggregateAnnotationCommandHandler(){
         AggregateAnnotationCommandHandler<Account> handler = new AggregateAnnotationCommandHandler<>(Account.class, eventSourcingRepository());
         for (String supportedCommand : handler.supportedCommands()) {
             commandBus().subscribe(supportedCommand, handler);
